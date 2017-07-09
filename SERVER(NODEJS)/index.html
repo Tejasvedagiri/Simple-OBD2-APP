@@ -1,0 +1,68 @@
+<html>
+<head>
+    <title> IO Connect </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <style>
+
+    </style>
+    <div class ="col-sm-5" id = "CAR-0">
+        <div class="Name0" id="Name0"></div>
+        <div class="Speed0" id="Speed0"></div>
+        <div class="RPM0" id="RPM0"></div>
+         <div  class="V_N0" id="V_N0"></div>
+         </div>
+    <div class ="col-sm-5" id = "CAR-1">
+        <div class="Name1" id="Name1"></div>
+         <div class="Speed1" id="Speed1"></div>
+         <div class="RPM1" id="RPM1"></div>
+         <div  class="V_N1" id="V_N1"></div>
+    </div>
+    <div class ="col-sm-5" id = "CAR-2">
+        <div class="Name2" id="Name2"></div>
+        <div class="Speed2" id="Speed2"></div>
+         <div class="RPM2" id="RPM2"></div>
+        <div  class="V_N2" id="V_N2"></div>
+    </div>
+    <div class ="col-sm-5" id = "CAR-3">
+        <div class="Name3" id="Name3"></div>
+         <div class="Speed3" id="Speed3"></div>
+        <div class="RPM3" id="RPM3"></div>
+        <div  class="V_N3" id="V_N3"></div>
+    </div>
+    <div class ="col-sm-5" id = "CAR-4">
+        <div class="Name4" id="Name4"></div>
+        <div class="Speed4" id="Speed4"></div>
+         <div class="RPM4" id="RPM4"></div>
+         <div  class="V_N4" id="V_N4"></div>
+        </div>
+        <script>
+            $(function(){
+                    var socket = io.connect();
+                    var socc=io();
+                    var $Name = $('#Name');
+                    var $Speed = $('#Speed');
+                    var $RPM = $('#RPM');
+                    var $V_N=$('#V_N');
+                    var $count;
+                    
+                    
+                    socket.emit('send message',"test");
+                    socket.on('new message',function(Name,Speed,RPM,V_N,Count){
+                            $count = Count
+                            for (var i =0; i<Count ;i++){
+                             $("#Name"+i).text(Name[i]);
+                             $("#Speed"+i).text(Speed[i]);
+                             $("#RPM"+i).text(RPM[i]);
+                             $("#V_N"+i).text(V_N[i]);
+                            }
+                            socket.emit('send message',"test");
+                            });
+
+        });
+        </script>
+</boday>
+</html>
